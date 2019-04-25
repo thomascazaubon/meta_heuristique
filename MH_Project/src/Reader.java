@@ -17,16 +17,23 @@ public class Reader {
 		while ((line = br.readLine()) != null)
 		{
 			tabString = line.split(" ");
-			System.out.println(line);
 			
 			if (!firstPart)
 			{
 				if (tabString.length != 2)
 				{
-					System.out.println(tabString[0]);
-					Node n1 = Node.createIfNotExists(Integer.parseInt(tabString[0]));
-					Node n2 = Node.createIfNotExists(Integer.parseInt(tabString[1]));
-					
+					int id1 = Integer.parseInt(tabString[0]);
+					int id2 = Integer.parseInt(tabString[1]);
+					Node n1 = g.getNode(id1);
+					Node n2 = g.getNode(id2);
+					if (n1 == null) {
+						n1 = new Node(Integer.parseInt(tabString[0]));
+						g.addNode(n1);
+					}
+					if (n2 == null) {
+						n2 = new Node(Integer.parseInt(tabString[1]));
+						g.addNode(n2);
+					}
 					Integer duedate;
 					if (tabString[2].equals("9223372036854775807"))
 					{
@@ -36,9 +43,8 @@ public class Reader {
 					{
 						duedate = Integer.parseInt(tabString[2]);
 					}
-					
-					g.addEdge(new Edge(n1,n2,duedate,Integer.parseInt(tabString[3]),Integer.parseInt(tabString[4])));
-					
+					Edge e = new Edge(n1,n2,duedate,Integer.parseInt(tabString[3]),Integer.parseInt(tabString[4]));
+					g.getNode(n1.getId()).addSuccessor(e);
 				}
 			}
 			else if (tabString[0].equals("c") && index != 0)
@@ -57,17 +63,15 @@ public class Reader {
 					int cpt = 3;
 					while (cpt<tabString.length)
 					{
-						n.addRoute(Node.createIfNotExists(Integer.parseInt(tabString[cpt])));
+						n.addRoute(new Node(Integer.parseInt(tabString[cpt])));
 						cpt++;
 					}
+					g.addNode(n);
 				}
 			}
-			
 			index++;
 		}
 		br.close();
-		
-		System.out.println(g.listOfEdges.size());
 		return g;
 	}
 

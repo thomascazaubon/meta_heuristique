@@ -3,13 +3,12 @@ import java.util.ArrayList;
 public class Node {
 
 	private int id;
-	static ArrayList<Node> listOfNodes = new ArrayList<Node>();
+	ArrayList<Edge> successors;
+
 	
-	
-	public Node(int id)
-	{
+	public Node(int id){
 		this.id = id;
-		Node.listOfNodes.add(this);
+		successors = new ArrayList<Edge>();
 	}
 
 	public int getId() {
@@ -20,25 +19,12 @@ public class Node {
 		this.id = id;
 	}
 	
-	public static ArrayList<Node> getListOfNodes()
+	public ArrayList<Edge> getSuccessors()
 	{
-		return Node.listOfNodes;
+		return successors;
 	}
 	
-	public static Node createIfNotExists(int id)
-	{
-		Node ret = null;
-		for (Node n : Node.listOfNodes)
-		{
-			if (n.getId() == id)
-			{
-				ret = n;
-			}
-		}
-		if (ret == null)
-		{
-			ret = new Node(id);
-		}
-		return ret;
+	public void addSuccessor(Edge successor) {
+		successors.add(successor);
 	}
 }

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class EvacNode extends Node{
 
-	int id;
 	int pop;
 	int rate;
 	ArrayList<Node> route;
@@ -11,7 +10,6 @@ public class EvacNode extends Node{
 	public EvacNode(int id, int pop, int rate)
 	{
 		super(id);
-		this.id = id;
 		this.pop = pop;
 		this.rate = rate;
 		this.route = new ArrayList<Node>();
@@ -20,6 +18,19 @@ public class EvacNode extends Node{
 	public void addRoute(Node n)
 	{
 		this.route.add(n);
+	}
+	
+	public ArrayList<Node> getRoute()
+	{
+		return route;
+	}
+	
+	public int getPop() {
+		return pop;
+	}
+	
+	public int getRate() {
+		return rate;
 	}
 
 }
