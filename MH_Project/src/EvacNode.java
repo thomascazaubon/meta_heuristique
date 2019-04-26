@@ -32,5 +32,9 @@ public class EvacNode extends Node{
 	public int getRate() {
 		return rate;
 	}
+	
+	public void setPop(int pop) {
+		this.pop = pop;
+	}
 
 }

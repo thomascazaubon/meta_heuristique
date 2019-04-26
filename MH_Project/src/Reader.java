@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Reader {
 
@@ -60,7 +62,8 @@ public class Reader {
 				else
 				{
 					EvacNode n = new EvacNode(Integer.parseInt(tabString[0]),Integer.parseInt(tabString[1]),Integer.parseInt(tabString[2]));
-					int cpt = 3;
+					int cpt = 4;
+					n.addRoute(n);
 					while (cpt<tabString.length)
 					{
 						n.addRoute(new Node(Integer.parseInt(tabString[cpt])));
@@ -73,6 +76,38 @@ public class Reader {
 		}
 		br.close();
 		return g;
+	}
+	
+	public static Solution readSolution(String file) throws IOException {
+		Solution s;
+		ArrayList<SolNode> nodes = new ArrayList<SolNode>();
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String line;
+		String[] tabString;
+		int numberOfNodes = 0;
+		int index = 0;
+		int cost = 0;
+		while ((line = br.readLine()) != null)
+		{
+			tabString = line.split(" ");
+			//La deuxième ligne contient le nombre de noeuds à évacuer
+			if (index == 1) {
+				numberOfNodes = Integer.parseInt(tabString[0]);
+			}
+			//A partir de la ligne 3 sont listés les noeuds à évacuer
+			if (index > 1 && index <= numberOfNodes + 1) {
+				SolNode n = new SolNode(Integer.parseInt(tabString[0]),Integer.parseInt(tabString[1]),Integer.parseInt(tabString[2]));
+				nodes.add(n);
+			}
+			//La deuxième ligne suivant les noeuds à évacuer contient la valeur de la fonction objectif
+			if(index == numberOfNodes + 3) {
+				cost = Integer.parseInt(tabString[0]);
+			}
+			index++;
+		}
+		s = new Solution(nodes, cost);
+		br.close();
+		return s;
 	}
 
 }
