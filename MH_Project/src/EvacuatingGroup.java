@@ -2,10 +2,15 @@ import java.util.ArrayList;
 
 public class EvacuatingGroup {
 	int id;
+	//Le nombre de personnes que contient le groupe
 	int size;
+	//Index du noeud sur lequel se situe le groupe dans l'arraylist
 	int nodeLocation;
+	//Distance parcourue sur l'edge courant
 	int edgeLocation;
+	//La route à suivre
 	ArrayList<Node> route;
+	//Le groupe est-il arrivé ?
 	boolean arrived;
 	
 	public EvacuatingGroup(int size, ArrayList<Node> route, int id) {
@@ -20,10 +25,12 @@ public class EvacuatingGroup {
 	public void forward() {
 		//On avance sur l'edge
 		edgeLocation++; 
+		//Edge courant
 		Edge currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
 		//Si on vient de finir de parcourir l'edge, on avance d'un noeud
 		if (edgeLocation == currentEdge.getLength()) {
 			nodeLocation++;
+			//On reset la position sur l'edge
 			edgeLocation = 0;
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
 		} else {
