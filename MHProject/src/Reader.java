@@ -47,6 +47,9 @@ public class Reader {
 					}
 					Edge e = new Edge(n1,n2,duedate,Integer.parseInt(tabString[3]),Integer.parseInt(tabString[4]));
 					g.getNode(n1.getId()).addSuccessor(e);
+					Edge e2 = new Edge(n2,n1,duedate,Integer.parseInt(tabString[3]),Integer.parseInt(tabString[4]));
+					g.getNode(n2.getId()).addSuccessor(e2);
+
 				}
 			}
 			else if (tabString[0].equals("c") && index != 0)
@@ -63,10 +66,10 @@ public class Reader {
 				{
 					EvacNode n = new EvacNode(Integer.parseInt(tabString[0]),Integer.parseInt(tabString[1]),Integer.parseInt(tabString[2]));
 					int cpt = 4;
-					n.addRoute(n);
+					n.addNodeRoute(n.getId());
 					while (cpt<tabString.length)
 					{
-						n.addRoute(new Node(Integer.parseInt(tabString[cpt])));
+						n.addNodeRoute(Integer.parseInt(tabString[cpt]));
 						cpt++;
 					}
 					g.addNode(n);

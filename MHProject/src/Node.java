@@ -38,4 +38,6 @@ public class Node {
 	public void addSuccessor(Edge successor) {
 		successors.add(successor);
 	}
+	
+	
 }

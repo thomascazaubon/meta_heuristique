@@ -15,6 +15,11 @@ public class Graph {
 		this.safe = Integer.parseInt(string);
 		
 	}
+	
+	public ArrayList<Node> getNodes()
+	{
+		return this.nodes;
+	}
 
 	public void addNode(Node n) {
 		nodes.add(n);
@@ -40,7 +45,7 @@ public class Graph {
 			if (n instanceof EvacNode) {
 				System.out.println("   - Node " + n.getId() + " !EVAC! [pop : " + ((EvacNode)n).getPop() + " | rate : " + ((EvacNode)n).getRate() + "]");
 				System.out.print("     Escape route is : ");
-				ArrayList<Node> route = ((EvacNode)n).getRoute();
+				ArrayList<Node> route = ((EvacNode)n).buildRoute(this);
 				for (int i = 0 ; i < route.size() ; i++) {
 					System.out.print(" -> " + route.get(i).getId());
 				}

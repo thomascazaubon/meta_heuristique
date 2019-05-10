@@ -5,7 +5,7 @@ public class Edge {
 	private Node n2;
 	private int duedate;
 	private int length;
-	private int capacity;
+	int capacity;
 	
 	public Edge(Node n1, Node n2, int dd, int l, int c)
 	{

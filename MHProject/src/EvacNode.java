@@ -4,7 +4,7 @@ public class EvacNode extends Node{
 
 	int pop;
 	int rate;
-	ArrayList<Node> route;
+	ArrayList<Integer> route;
 	
 	
 	public EvacNode(int id, int pop, int rate)
@@ -12,15 +12,15 @@ public class EvacNode extends Node{
 		super(id);
 		this.pop = pop;
 		this.rate = rate;
-		this.route = new ArrayList<Node>();
+		this.route = new ArrayList<Integer>();
 	}
 	
-	public void addRoute(Node n)
+	public void addNodeRoute(int i)
 	{
-		this.route.add(n);
+		this.route.add(i);
 	}
 	
-	public ArrayList<Node> getRoute()
+	public ArrayList<Integer> getRoute()
 	{
 		return route;
 	}
@@ -36,5 +36,16 @@ public class EvacNode extends Node{
 	public void setPop(int pop) {
 		this.pop = pop;
 	}
+	
+	public ArrayList<Node> buildRoute(Graph g)
+	{
+		ArrayList<Node> resRoute = new ArrayList<Node>();
+		for (Integer nr : this.route) {
+			resRoute.add(g.getNode(nr));
+		}
+		
+		return resRoute;
+	}
+	
 
 }

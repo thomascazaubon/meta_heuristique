@@ -40,12 +40,9 @@ public class Checker {
 							//(La route ne contient pas les successeurs de chaque noeud qu'elle contient ce qui pose problème) 
 							//Vient de la façon dont elle est construite au momement de lire le graphe
 							//A CHANGER !!!
-							ArrayList<Node> route = new ArrayList<Node>();
-							for (Node nr : n.getRoute()) {
-								route.add(g.getNode(nr.getId()));
-							}
+
 							//On émet un groupe d'évacuation
-							groups.add(new EvacuatingGroup(n.getPop(), route, gId));
+							groups.add(new EvacuatingGroup(n.getPop(), n.buildRoute(g), gId));
 							System.out.println(n.getPop() + " people have left node " + n.getId() + " at t = " + t + " [ID : " + gId + "]. 0 remaining.");
 							n.setPop(0);
 						} else {
@@ -56,12 +53,9 @@ public class Checker {
 							//(La route ne contient pas les successeurs de chaque noeud qu'elle contient ce qui pose problème) 
 							//Vient de la façon dont elle est construite au momement de lire le graphe
 							//A CHANGER !!!
-							ArrayList<Node> route = new ArrayList<Node>();
-							for (Node nr : n.getRoute()) {
-								route.add(g.getNode(nr.getId()));
-							}
+							
 							//On émet un groupe d'évacuation
-							groups.add(new EvacuatingGroup(sn.getRate(), route, gId));
+							groups.add(new EvacuatingGroup(sn.getRate(), n.buildRoute(g), gId));
 							System.out.println(sn.getRate() + " people have left node " + n.getId() + " at t = " + t + " [ID : " + gId + "]. " + n.getPop() + " remaining.");
 						}
 						gId++;
@@ -137,4 +131,6 @@ public class Checker {
 		}
 		return valid;
 	}
+	
+	
 }

@@ -9,8 +9,10 @@ public class Main {
 		try {
 			g = Reader.readGraph("instances/exemple1.full");
 			s = Reader.readSolution("instances/solution.txt");
+			//Checker.check(g, s);
 			//g.display();
-			Checker.check(g, s);
+			System.out.println(SolutionBuilder.getBorneInf(g));
+			System.out.println(SolutionBuilder.getBorneSup(g));
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
 		}
