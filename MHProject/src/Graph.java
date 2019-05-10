@@ -8,6 +8,7 @@ public class Graph {
 	public Graph()
 	{
 		this.nodes = new ArrayList<Node>();
+
 	}
 
 	public void setSafe(String string) {
