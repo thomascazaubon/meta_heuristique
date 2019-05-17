@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Checker {
 	
-	public static boolean check(Graph g, Solution s) {
+	public static boolean check(Graph g, Solution s, boolean withCapacities, boolean withDeadlines) {
 		boolean valid = true;
 		//Tous les groupes actuellement entrain d'évacuer
 		ArrayList<EvacuatingGroup> groups = new ArrayList<EvacuatingGroup>();
@@ -86,26 +86,30 @@ public class Checker {
 								capacities.put(eg.getCurrentEdge(), eg.getSize());
 							}
 						}
-						//On vérifie également que la duedate de l'arc sur lequel ils sont n'est pas expirée
-						if (eg.getCurrentEdge().getDuedate() < t) {
-							valid = false;
-							System.out.println("[DUEDATE EXPIRED : group " + eg.getId() + " in on edge from node " + eg.getCurrentEdge().getN1().getId() + " to node " + eg.getCurrentEdge().getN2().getId() + " which duedate was " + eg.getCurrentEdge().getDuedate() + " !]");
-							break;
+						if (withDeadlines) {
+							//On vérifie également que la duedate de l'arc sur lequel ils sont n'est pas expirée
+							if (eg.getCurrentEdge().getDuedate() < t) {
+								valid = false;
+								System.out.println("[DUEDATE EXPIRED : group " + eg.getId() + " in on edge from node " + eg.getCurrentEdge().getN1().getId() + " to node " + eg.getCurrentEdge().getN2().getId() + " which duedate was " + eg.getCurrentEdge().getDuedate() + " !]");
+								break;
+							}
 						}
 					}
 				}
 				if(valid) {
-					//On vérifie maintenant que les capacités ne sont pas excédées
-					for(HashMap.Entry<Edge, Integer> pair : capacities.entrySet()) {
-						System.out.println(pair.getValue() + " people entering on edge from node " + pair.getKey().getN1().getId() + " to node " + pair.getKey().getN2().getId() + ", capacity is " + pair.getKey().getCapacity() + ".");
+					if(withCapacities) {
+						//On vérifie maintenant que les capacités ne sont pas excédées
+						for(HashMap.Entry<Edge, Integer> pair : capacities.entrySet()) {
+							System.out.println(pair.getValue() + " people entering on edge from node " + pair.getKey().getN1().getId() + " to node " + pair.getKey().getN2().getId() + ", capacity is " + pair.getKey().getCapacity() + ".");
 
-						if (pair.getKey().getCapacity() < pair.getValue()) {
-							valid = false;
-							System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
-							//On n'essaye pas de vérifier les autres arcs
-							break;
-						} else {
-							System.out.println("\n[OK]");
+							if (pair.getKey().getCapacity() < pair.getValue()) {
+								valid = false;
+								System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
+								//On n'essaye pas de vérifier les autres arcs
+								break;
+							} else {
+								System.out.println("\n[OK]");
+							}
 						}
 					}
 					//On enlève les groupes qui sont arrivés

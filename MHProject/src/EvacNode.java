@@ -4,6 +4,7 @@ public class EvacNode extends Node{
 
 	int pop;
 	int rate;
+	static int nbEvacNode = 0;
 	ArrayList<Integer> route;
 	
 	
@@ -13,6 +14,7 @@ public class EvacNode extends Node{
 		this.pop = pop;
 		this.rate = rate;
 		this.route = new ArrayList<Integer>();
+		nbEvacNode++;
 	}
 	
 	public void addNodeRoute(int i)
@@ -45,6 +47,24 @@ public class EvacNode extends Node{
 		}
 		
 		return resRoute;
+	}
+	
+	public int getMinRate(Graph g) {
+		int min = rate;
+		ArrayList<Node>route = buildRoute(g);
+		for (int i = 0 ; i < route.size()-1 ; i++)
+		{
+			if (min > route.get(i).getSuccessor(route.get(i+1).getId()).getCapacity())
+			{
+				System.out.println("Dans le if");
+				min = route.get(i).getSuccessor(route.get(i+1).getId()).getCapacity();
+			}
+		}
+		return min;
+	}
+
+	public static int getNbEvacNode() {
+		return nbEvacNode;
 	}
 	
 

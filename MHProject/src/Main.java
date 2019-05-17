@@ -7,12 +7,11 @@ public class Main {
 		Graph g;
 		Solution s;
 		try {
-			g = Reader.readGraph("instances/exemple1.full");
-			s = Reader.readSolution("instances/solution.txt");
-			//Checker.check(g, s);
-			//g.display();
-			System.out.println(SolutionBuilder.getBorneInf(g));
-			System.out.println(SolutionBuilder.getBorneSup(g));
+			String n = "sparse_10_30_3_10_I";
+			g = Reader.readGraph(n);
+			s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
+			//Graph, Solution, Capacity, Duedate
+			Checker.check(g, s, false, false);
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
 		}

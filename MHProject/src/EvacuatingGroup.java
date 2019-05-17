@@ -23,18 +23,24 @@ public class EvacuatingGroup {
 	}
 	
 	public void forward() {
-		//On avance sur l'edge
-		edgeLocation++; 
 		//Edge courant
 		Edge currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+		//On avance sur l'edge
+		edgeLocation++; 
 		//Si on vient de finir de parcourir l'edge, on avance d'un noeud
-		if (edgeLocation == currentEdge.getLength()) {
+		if (edgeLocation >= currentEdge.getLength() && currentEdge.getLength() > 0) {
 			nodeLocation++;
 			//On reset la position sur l'edge
 			edgeLocation = 0;
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
 		} else {
+			System.out.println(currentEdge.getLength());
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
+		}
+		while (currentEdge.getLength() == 0 && nodeLocation != route.size()-1) {
+			nodeLocation++;
+			edgeLocation = 1;
+			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
 		}
 		//Si on est arrivé au dernier noeud, le paquet est évacué
 		if (nodeLocation == route.size()-1) {

@@ -4,6 +4,7 @@ public class Graph {
 
 	ArrayList<Node> nodes;
 	int safe = -1;
+	String name;
 	
 	public Graph()
 	{
@@ -14,6 +15,14 @@ public class Graph {
 	public void setSafe(String string) {
 		this.safe = Integer.parseInt(string);
 		
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public ArrayList<Node> getNodes()

@@ -7,11 +7,12 @@ import java.util.ArrayList;
 public class Reader {
 
 	
-	public static Graph readGraph(String file) throws IOException
+	public static Graph readGraph(String name) throws IOException
 	{
 		Graph g = new Graph();
 		
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		BufferedReader br = new BufferedReader(new FileReader("instances/"+name+".full"));
+		g.setName(name.split("\\.")[0]);
 		String line;
 		boolean firstPart = true;
 		String[] tabString;
