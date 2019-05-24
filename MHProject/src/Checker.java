@@ -25,6 +25,14 @@ public class Checker {
 				System.out.println("************************************************************************");
 				System.out.println("Checker, t = " + t);
 				System.out.println("\n[EVACUATING]\n");
+				//On fait avancer tous les groupes et on retire ceux qui sont arrivés au fur et à mesure
+				for (EvacuatingGroup eg : groups) {
+					eg.forward();
+					//Si le groupe est arrivé on l'ajoute à la liste des groupes à supprimer de groups
+					if (eg.hasArrived()) {
+						toBeRemoved.add(eg);
+					}
+				}
 				//On parcourt chaque noeud à évacuer
 				for (SolNode sn : s.getNodes()) {
 					//On récupère son homologue dans le graphe
@@ -61,14 +69,6 @@ public class Checker {
 						gId++;
 					}
 				}
-				//On fait avancer tous les groupes et on retire ceux qui sont arrivés au fur et à mesure
-				for (EvacuatingGroup eg : groups) {
-					eg.forward();
-					//Si le groupe est arrivé on l'ajoute à la liste des groupes à supprimer de groups
-					if (eg.hasArrived()) {
-						toBeRemoved.add(eg);
-					}
-				}
 				System.out.println("\n[CONSTRAINT CHECKING]\n");
 				//On va lister les edges qui doivent être vérifiées
 				for (EvacuatingGroup eg : groups) {
@@ -77,7 +77,7 @@ public class Checker {
 						//Si edgelocation vaut 0, c'est que le groupe vient d'arriver sur un noeud (une intersection) on ne va
 						//vérifier que les capacités sont respectées qu'en entrée de chaque edge
 						if (eg.edgeLocation == 0) {
-							System.out.println("Group " + eg.getId() + " containing " + eg.getSize() +  " people is entering node " + eg.getCurrentEdge().getN1().getId() + ".");
+							System.out.println("Group " + eg.getId() + " containing " + eg.getSize() +  " people is entering edge from node " + eg.getCurrentEdge().getN1().getId() + " to node " + eg.getCurrentEdge().getN2().getId() +".");
 							//Si l'edge en cours à déjà au moins un groupe à l'entrée, on incrémente la somme des personnes présentes
 							if (capacities.containsKey(eg.getCurrentEdge())) {
 								capacities.put(eg.getCurrentEdge(), capacities.get(eg.getCurrentEdge()) + eg.getSize());

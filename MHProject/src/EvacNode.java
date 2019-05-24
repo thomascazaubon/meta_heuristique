@@ -56,7 +56,6 @@ public class EvacNode extends Node{
 		{
 			if (min > route.get(i).getSuccessor(route.get(i+1).getId()).getCapacity())
 			{
-				System.out.println("Dans le if");
 				min = route.get(i).getSuccessor(route.get(i+1).getId()).getCapacity();
 			}
 		}
