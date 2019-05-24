@@ -32,6 +32,7 @@ public class EvacuatingGroup {
 			nodeLocation++;
 			//On reset la position sur l'edge
 			edgeLocation = 0;
+			if (nodeLocation < route.size()-1)
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
 		} else {
 			//System.out.println(currentEdge.getLength());
