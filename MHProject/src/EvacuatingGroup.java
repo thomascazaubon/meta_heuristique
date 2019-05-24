@@ -37,10 +37,18 @@ public class EvacuatingGroup {
 			System.out.println(currentEdge.getLength());
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
 		}
-		while (currentEdge.getLength() == 0 && nodeLocation != route.size()-1) {
-			nodeLocation++;
+		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 1) {
 			edgeLocation = 1;
+			/*
+			System.out.println("Move");
+			System.out.print(nodeLocation + "/" + route.size() + "\n");
+			for (int z = 0 ; z < route.size() ; z++) {
+				System.out.print("-" + route.get(z).getId());
+			}
+			System.out.println();
+			*/
 			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+			nodeLocation++;
 		}
 		//Si on est arrivé au dernier noeud, le paquet est évacué
 		if (nodeLocation == route.size()-1) {

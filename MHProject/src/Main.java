@@ -7,11 +7,11 @@ public class Main {
 		Graph g;
 		Solution s;
 		try {
-			String n = "sparse_10_30_3_10_I";
+			String n = "papier";
 			g = Reader.readGraph(n);
 			s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 			//Graph, Solution, Capacity, Duedate
-			Checker.check(g, s, false, false);
+			Checker.check(g, s, true, false);
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
 		}

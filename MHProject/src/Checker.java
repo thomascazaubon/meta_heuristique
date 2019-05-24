@@ -119,13 +119,14 @@ public class Checker {
 				}
 				//S'il reste des groupes qui ne sont pas arrivés alors qu'on est arrivé à la fin des itérations
 				//la solution n'est pas valide
-				if (t == s.getCost() -1 && !groups.isEmpty()) {
-					valid = false;
-				}
+				
 				if(!valid) {
 					break;
 				}
 			}
+		}
+		if (!groups.isEmpty()) {
+			valid = false;
 		}
 		
 		if (!valid) {
