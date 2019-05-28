@@ -35,7 +35,8 @@ public class SolutionBuilder {
 		{
 			if (n instanceof EvacNode)
 			{
-				min += (((EvacNode) n).getPop() / ((EvacNode) n).getMinRate(g))-1;
+				min += Math.ceil(( ((float)(((EvacNode) n).getPop())) / ((EvacNode) n).getMinRate(g)));
+				//System.out.println(min);
 				ArrayList<Node> route = ((EvacNode) n).buildRoute(g);
 				
 				for (int i = 0 ; i < route.size()-1 ; i++)
@@ -65,7 +66,7 @@ public class SolutionBuilder {
 				{
 					ArrayList<Node> route = ((EvacNode) n).buildRoute(g);
 					content += Integer.toString(n.getId()) + " " + Integer.toString(((EvacNode) n).getMinRate(g)) + " " + Integer.toString(cpt) + "\n";
-					cpt += (((EvacNode) n).getPop() / ((EvacNode) n).getMinRate(g))-1;
+					cpt += Math.ceil(( ((float)(((EvacNode) n).getPop())) / ((EvacNode) n).getMinRate(g)));
 					
 					for (int i = 0 ; i < route.size()-1 ; i++)
 					{

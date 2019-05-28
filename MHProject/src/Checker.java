@@ -3,7 +3,8 @@ import java.util.HashMap;
 
 public class Checker {
 	
-	public static boolean check(Graph g, Solution s, boolean withCapacities, boolean withDeadlines) {
+	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines) {
+		Graph g = gr;
 		boolean valid = true;
 		//Tous les groupes actuellement entrain d'évacuer
 		ArrayList<EvacuatingGroup> groups = new ArrayList<EvacuatingGroup>();
@@ -72,7 +73,7 @@ public class Checker {
 				System.out.println("\n[CONSTRAINT CHECKING]\n");
 				//On va lister les edges qui doivent être vérifiées
 				for (EvacuatingGroup eg : groups) {
-					if (!eg.hasArrived()) {
+					if (!eg.evacuating) {
 						//On regarde chaque noeud qui vient de voir arriver un nouveau groupe
 						//Si edgelocation vaut 0, c'est que le groupe vient d'arriver sur un noeud (une intersection) on ne va
 						//vérifier que les capacités sont respectées qu'en entrée de chaque edge
