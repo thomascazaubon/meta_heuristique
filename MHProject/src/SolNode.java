@@ -22,4 +22,9 @@ public class SolNode {
 	public int getStartDate() {
 		return startDate;
 	}
+
+	public void setStartDate(int i) {
+		this.startDate = i;
+		
+	}
 }

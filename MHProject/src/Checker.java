@@ -134,6 +134,13 @@ public class Checker {
 		} else {
 			System.out.println("Solution is valid");
 		}
+		for (Node n : g.nodes)
+		{
+			if (n instanceof EvacNode)
+			{
+				((EvacNode) n).reinitPop();
+			}
+		}
 		return valid;
 	}
 	
