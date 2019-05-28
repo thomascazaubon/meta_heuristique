@@ -27,6 +27,12 @@ public class EvacuatingGroup {
 	}
 	
 	public void forward() {
+		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 2) {
+			edgeLocation = 0;
+			nodeLocation++;
+			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+			
+		}
 		edgeLocation++;
 		//Si on vient de finir de parcourir l'edge, on avance d'un noeud
 		if (edgeLocation >= currentEdge.getLength() && !evacuating) {
@@ -43,12 +49,7 @@ public class EvacuatingGroup {
 			if (!evacuating)
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
 		}
-		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 2) {
-			edgeLocation = 0;
-			nodeLocation++;
-			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
-			
-		}
+
 		if (evacuating) {
 			arrived = true;
 			System.out.println("Evacuating group " + id + " containing " + size + " people from node " + route.get(0).getId() + " is now safe.");

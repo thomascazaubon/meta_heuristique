@@ -1,5 +1,5 @@
 papier
-2
+64
 1 2 0
 2 1 22
 valid
