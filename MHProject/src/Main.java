@@ -7,11 +7,12 @@ public class Main {
 		Graph g;
 		Solution s;
 		try {
-			String n = "papier";
+			String n = "simple_exemple_2";
 			g = Reader.readGraph(n);
 			s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 			//Graph, Solution, Capacity, Duedate
 			Checker.check(g, s, true, false);
+			//Checker.check(g, s, true, false);
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
 		}

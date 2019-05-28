@@ -10,52 +10,54 @@ public class EvacuatingGroup {
 	int edgeLocation;
 	//La route à suivre
 	ArrayList<Node> route;
+	Edge currentEdge;
 	//Le groupe est-il arrivé ?
 	boolean arrived;
+	boolean evacuating;
 	
 	public EvacuatingGroup(int size, ArrayList<Node> route, int id) {
 		this.size = size;
 		this.route = route;
 		this.id = id;
 		arrived = false;
+		evacuating = false;
 		nodeLocation = 0;
 		edgeLocation = 0;
+		currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
 	}
 	
 	public void forward() {
-		//Edge courant
-		Edge currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
-		//On avance sur l'edge
-		edgeLocation++; 
+		edgeLocation++;
 		//Si on vient de finir de parcourir l'edge, on avance d'un noeud
-		if (edgeLocation >= currentEdge.getLength() && currentEdge.getLength() > 0) {
+		if (edgeLocation >= currentEdge.getLength() && !evacuating) {
 			nodeLocation++;
 			//On reset la position sur l'edge
 			edgeLocation = 0;
-			if (nodeLocation < route.size()-1)
-			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
+			if (nodeLocation < route.size()-1) {
+				currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+				if(currentEdge.getLength() > 0)
+					System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
+			}
 		} else {
 			//System.out.println(currentEdge.getLength());
+			if (!evacuating)
 			System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
 		}
 		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 2) {
 			edgeLocation = 0;
 			nodeLocation++;
-			/*
-			System.out.println("Move");
-			System.out.print(nodeLocation + "/" + route.size() + "\n");
-			for (int z = 0 ; z < route.size() ; z++) {
-				System.out.print("-" + route.get(z).getId());
-			}
-			System.out.println();
-			*/
 			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
 			
 		}
-		//Si on est arrivé au dernier noeud, le paquet est évacué
-		if (nodeLocation == route.size()-1) {
+		if (evacuating) {
 			arrived = true;
 			System.out.println("Evacuating group " + id + " containing " + size + " people from node " + route.get(0).getId() + " is now safe.");
+		}
+			
+		//Si on est arrivé au dernier noeud, le paquet est évacué
+		if (nodeLocation == route.size()-1 && !arrived) {
+			evacuating = true;
+			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached destination.");
 		}
 	}
 	
@@ -64,7 +66,7 @@ public class EvacuatingGroup {
 	}
 	
 	public Edge getCurrentEdge() {
-		return route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+		return currentEdge;
 	}
 	
 	public int getSize() {

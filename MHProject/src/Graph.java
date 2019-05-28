@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Graph {
+public class Graph implements Cloneable{
 
 	ArrayList<Node> nodes;
 	int safe = -1;
@@ -67,5 +67,18 @@ public class Graph {
 			}
 		}
 		System.out.println("**********************   END OF GRAPH   ********************");
+	}
+	
+	public Graph clone()
+	{
+		Graph o = null;
+		try {
+			o = (Graph) super.clone();
+			o.display();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return o;
 	}
 }
