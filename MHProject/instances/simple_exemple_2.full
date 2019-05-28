@@ -5,5 +5,5 @@ c [evacuation info] format: header with <num evac nodes> <id of safe node> then 
 c [graph] format: header with <num nodes> <num edges> then one line per edge <node 1> <node 2> <duedate> <length> <capacity>
 4 3
 1 3 9223372036854775807 1 1
-2 3 9223372036854775807 1 1
+2 3 9223372036854775807 0 1
 3 4 9223372036854775807 1 1

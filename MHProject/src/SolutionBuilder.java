@@ -58,7 +58,12 @@ public class SolutionBuilder {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 			String content = "";
 			content += g.getName() + "\n";
-			content += Integer.toString(EvacNode.getNbEvacNode()) + "\n";
+			int numberEvac = 0;
+			for (Node n : g.getNodes()) {
+				if (n instanceof EvacNode)
+					numberEvac++;
+			}
+			content += Integer.toString(numberEvac) + "\n";
 			int cpt = 0;
 			for (Node n : g.getNodes())
 			{
@@ -94,7 +99,12 @@ public class SolutionBuilder {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 			String content = "";
 			content += g.getName() + "\n";
-			content += Integer.toString(EvacNode.getNbEvacNode()) + "\n";
+			int numberEvac = 0;
+			for (Node n : g.getNodes()) {
+				if (n instanceof EvacNode)
+					numberEvac++;
+			}
+			content += Integer.toString(numberEvac) + "\n";
 			for (Node n : g.getNodes())
 			{
 				if (n instanceof EvacNode)

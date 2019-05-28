@@ -4,6 +4,8 @@ import java.util.HashMap;
 public class Checker {
 	
 	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines) {
+		int t = 0;
+		int time = 0;
 		Graph g = gr;
 		boolean valid = true;
 		//Tous les groupes actuellement entrain d'évacuer
@@ -18,7 +20,10 @@ public class Checker {
 			}
 		}
 		if (valid) {
-			for (int t = 0 ; t < s.getCost() ; t++) {
+			
+			
+			
+			for (t = 0 ; t < s.getCost() ; t++) {
 				//Pour vérifier qu'aucune capacité n'est dépassée
 				HashMap<Edge,Integer> capacities = new HashMap<Edge,Integer>();
 				//La liste des groupes qui sont arrivés et qui doivent être retirés de groups
@@ -117,6 +122,23 @@ public class Checker {
 					for (EvacuatingGroup eg : toBeRemoved) {
 						groups.remove(eg);
 					}
+					boolean finished = true;
+					if (groups.isEmpty()) {
+						for (Node ng : g.getNodes()) {
+							if (ng instanceof EvacNode) {
+								if (((EvacNode) ng).getPop() > 0) {
+									finished = false;
+								}
+							}
+						}
+					} else {
+						finished = false;
+					}
+					if (finished && t < s.getCost() -1 ) {
+						valid = false;
+						time = t;
+						break;
+					}	
 				}
 				//S'il reste des groupes qui ne sont pas arrivés alors qu'on est arrivé à la fin des itérations
 				//la solution n'est pas valide
@@ -126,7 +148,9 @@ public class Checker {
 				}
 			}
 		}
-		if (!groups.isEmpty()) {
+		
+		System.out.println(time);
+		if (!groups.isEmpty() || t < s.getCost()) {
 			valid = false;
 		}
 		
