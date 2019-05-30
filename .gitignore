@@ -3,6 +3,6 @@ MHProject/bin/
 .project
 MH_Project/.classpath
 MH_Project/.project
-
+*.sol
 
 /.metadata/

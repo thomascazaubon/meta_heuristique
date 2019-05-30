@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-	
+
 	public static void main(String[] args) {
 		Graph g;
 		Solution s;
@@ -18,15 +18,16 @@ public class Main {
 			System.out.println("Invalid path !");
 		/*
 		boolean multiple = true;
+		boolean multiple = false;
 		if (multiple) {
 			ArrayList<String> notValid = new ArrayList<String>();
 			File file = new File("instances/");
 			File[] files = file.listFiles();
 			for(File f: files){
-				if (f.getName().split("\\.")[1].equals("full") && f.getName().split("\\.")[0].equals("dense_10_30_3_3_I")) {
+				if (f.getName().split("\\.")[1].equals("full")) {
 					String n = f.getName().split("\\.")[0];
 					try {
-						System.out.println("Name = " + n);
+						//System.out.println("Name = " + n);
 						Graph g = Reader.readGraph(n);
 						Solution s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 						//Graph, Solution, Capacity, Duedate
@@ -45,7 +46,7 @@ public class Main {
 			Graph g;
 			Solution s;
 			try {
-				String n = "dense_10_30_3_3_I";
+				String n = "dense_10_30_3_5_I";
 				g = Reader.readGraph(n);
 				s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 				//Graph, Solution, Capacity, Duedate
