@@ -15,16 +15,19 @@ public class SolNode {
 		return id;
 	}
 	
-	public int getRate() {
-		return rate;
-	}
-	
 	public int getStartDate() {
 		return startDate;
 	}
 
 	public void setStartDate(int i) {
 		this.startDate = i;
-		
+	}
+	
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int i) {
+		this.startDate = i;
 	}
 }

@@ -18,14 +18,7 @@ public class EvacNode extends Node{
 		this.route = new ArrayList<Integer>();
 		nbEvacNode++;
 	}
-	
-	public EvacNode(EvacNode n) {
-		super(n.getId());
-		this.pop = n.getPop();
-		this.rate = n.getRate();
-		this.route = (ArrayList<Integer>) n.route.clone();
-		
-	}
+
 
 	public void addNodeRoute(int i)
 	{

@@ -26,7 +26,7 @@ public class EvacuatingGroup {
 		currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
 	}
 	
-	public void forward() {
+	public void forward(boolean debug) {
 		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 2) {
 			edgeLocation = 0;
 			nodeLocation++;
@@ -41,24 +41,37 @@ public class EvacuatingGroup {
 			edgeLocation = 0;
 			if (nodeLocation < route.size()-1) {
 				currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
-				if(currentEdge.getLength() > 0)
-					System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
+				if(currentEdge.getLength() > 0) {
+					if (debug)
+					{
+						System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached node " + route.get(nodeLocation).getId() + ".");
+					}
+				}
 			}
 		} else {
 			//System.out.println(currentEdge.getLength());
-			if (!evacuating)
-			System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
+			if (!evacuating) {
+				if (debug)
+				{
+					System.out.println("Group " + id + " from node " + route.get(0).getId() + " is at position " + edgeLocation + "/" + currentEdge.getLength() + " on edge from node " + route.get(nodeLocation).getId() + " to node " + route.get(nodeLocation + 1).getId() + ".");
+				}
+			}
 		}
 
 		if (evacuating) {
 			arrived = true;
+			if (debug) {
 			System.out.println("Evacuating group " + id + " containing " + size + " people from node " + route.get(0).getId() + " is now safe.");
+			}
 		}
 			
 		//Si on est arrivé au dernier noeud, le paquet est évacué
 		if (nodeLocation == route.size()-1 && !arrived) {
 			evacuating = true;
-			System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached destination.");
+			if (debug)
+			{
+				System.out.println("Group " + id + " from node " + route.get(0).getId() + " has reached destination.");
+			}
 		}
 	}
 	
