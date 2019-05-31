@@ -28,4 +28,29 @@ public class Solution {
 		System.out.println("******** END OF SOLUTION *********");
 	}
 	
+	public String toStringSol(Graph g)
+	{
+		String content = "";
+		content += g.getName() + "\n";
+		content += Integer.toString(EvacNode.getNbEvacNode()) + "\n";
+		for (SolNode sn : this.nodes)
+		{
+			content += Integer.toString(sn.getId()) + " " + Integer.toString(((SolNode) sn).getRate()) + " " + Integer.toString(sn.startDate) + "\n";
+		}
+		content += "valid\n";
+		content += this.cost;
+		return content;
+	}
+
+	public void baisserStartDate() {
+		for (SolNode s : this.nodes)
+		{
+			if (s.getStartDate()>0)
+			{
+				s.setStartDate(s.getStartDate()-1);
+			}
+		}
+		
+	}
+	
 }

@@ -12,6 +12,7 @@ public class Graph implements Cloneable{
 
 	}
 
+
 	public void setSafe(String string) {
 		this.safe = Integer.parseInt(string);
 		
