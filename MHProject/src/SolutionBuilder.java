@@ -48,7 +48,6 @@ public class SolutionBuilder {
 
 			}
 		}
-		System.out.println("MIN = " + min);
 		return min;
 	}
 	public static String buildSolutionSup(Graph g, String name) {

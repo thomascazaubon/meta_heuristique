@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
+		/*
 		Graph g;
 		Solution s;
 		try {
@@ -16,8 +17,8 @@ public class Main {
 			RechercheLocale.increaseRate(g,s);
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
-		/*
-		boolean multiple = true;
+			*/
+	
 		boolean multiple = false;
 		if (multiple) {
 			ArrayList<String> notValid = new ArrayList<String>();
@@ -31,7 +32,7 @@ public class Main {
 						Graph g = Reader.readGraph(n);
 						Solution s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 						//Graph, Solution, Capacity, Duedate
-						if (!Checker.check(g, s, true, false))
+						if (!Checker.check(g, s, true, false, false))
 							notValid.add(n);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -46,15 +47,15 @@ public class Main {
 			Graph g;
 			Solution s;
 			try {
-				String n = "papier";
+				String n = "simple_exemple_2";
 				g = Reader.readGraph(n);
 				s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 				//Graph, Solution, Capacity, Duedate
-				Checker.check(g, s, true, false);
+				Checker.check(g, s, true, false, true);
 				//Checker.check(g, s, true, false);
 			} catch (IOException e) {
 				System.out.println("Invalid path !");
-			}*/
+			}
 		}
 	}
 }

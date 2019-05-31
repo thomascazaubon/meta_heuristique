@@ -168,9 +168,7 @@ public class Checker {
 				}
 			}
 		}
-
-		System.out.println(time);
-		if (!groups.isEmpty() || t < s.getCost()) {
+		if (!groups.isEmpty()) {
 			valid = false;
 		}
 		if (debug)
