@@ -19,7 +19,7 @@ public class Main {
 						Solution s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 						//Graph, Solution, Capacity, Duedate
 						if (!Checker.check(g, s, true, false))
-							notValid.add(f.getName());
+							notValid.add(n);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						//e.printStackTrace();
@@ -33,7 +33,7 @@ public class Main {
 			Graph g;
 			Solution s;
 			try {
-				String n = "dense_10_30_3_5_I";
+				String n = "papier";
 				g = Reader.readGraph(n);
 				s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 				//Graph, Solution, Capacity, Duedate

@@ -27,7 +27,9 @@ public class EvacuatingGroup {
 		while (currentEdge.getLength() == 0 && nodeLocation < route.size() - 2) {
 			edgeLocation = 0;
 			nodeLocation++;
-			currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+			if(nodeLocation < route.size()-1){
+                currentEdge = route.get(nodeLocation).getSuccessor(route.get(nodeLocation + 1).getId());
+            }
 			
 		}
 	}

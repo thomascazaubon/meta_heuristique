@@ -20,10 +20,7 @@ public class Checker {
 			}
 		}
 		if (valid) {
-			
-			
-			
-			for (t = 0 ; t < s.getCost() ; t++) {
+			for (t = 0 ; t <= s.getCost() ; t++) {
 				//Pour vérifier qu'aucune capacité n'est dépassée
 				HashMap<Edge,Integer> capacities = new HashMap<Edge,Integer>();
 				//La liste des groupes qui sont arrivés et qui doivent être retirés de groups
@@ -134,7 +131,7 @@ public class Checker {
 					} else {
 						finished = false;
 					}
-					if (finished && t < s.getCost() -1 ) {
+					if (finished && t < s.getCost()) {
 						valid = false;
 						time = t;
 						break;
