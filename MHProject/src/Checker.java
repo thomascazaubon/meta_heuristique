@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Checker {
 
-	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug) {
+	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug, boolean checkerWithoutCost) {
 		int t = 0;
 		Graph g = gr;
 		boolean valid = true;
@@ -126,8 +126,11 @@ public class Checker {
 							}
 							if (pair.getKey().getCapacity() < pair.getValue()) {
 								valid = false;
-								System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
-								//On n'essaye pas de vérifier les autres arcs
+								if (debug)
+								{
+									System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
+								}
+									//On n'essaye pas de vérifier les autres arcs
 								break;
 							} else {
 								if (debug)
@@ -154,9 +157,13 @@ public class Checker {
 					} else {
 						finished = false;
 					}
+					
 					if (finished && t < s.getCost()) {
+						/*
 						valid = false;
 						break;
+						*/
+						s.setCost(t);
 					}
 					
 				}
@@ -168,7 +175,7 @@ public class Checker {
 				}
 			}
 		}
-		System.out.println("===> Reached announced cost.");
+		
 		if (!groups.isEmpty()) {
 			valid = false;
 		}
@@ -176,6 +183,7 @@ public class Checker {
 		s.setCost(t);
 		if (debug)
 		{
+			System.out.println("===> Reached announced cost.");
 			if (!valid) {
 				System.out.println("Solution is not valid");
 			} else {

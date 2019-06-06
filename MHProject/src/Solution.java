@@ -18,10 +18,6 @@ public class Solution {
 		return cost;
 	}
 	
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-	
 	public void display() {
 		System.out.println("************ SOLUTION ************");
 		System.out.println("Number of evac nodes : " + nodes.size());
@@ -54,6 +50,11 @@ public class Solution {
 				s.setStartDate(s.getStartDate()-1);
 			}
 		}
+		
+	}
+
+	public void setCost(int t) {
+		this.cost = t;
 		
 	}
 	
