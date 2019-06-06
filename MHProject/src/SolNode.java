@@ -28,6 +28,6 @@ public class SolNode {
 	}
 
 	public void setRate(int i) {
-		this.startDate = i;
+		this.rate = i;
 	}
 }

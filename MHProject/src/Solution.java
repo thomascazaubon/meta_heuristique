@@ -52,5 +52,10 @@ public class Solution {
 		}
 		
 	}
+
+	public void setCost(int t) {
+		this.cost = t;
+		
+	}
 	
 }

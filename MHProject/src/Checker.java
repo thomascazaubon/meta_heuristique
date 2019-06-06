@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Checker {
 
-	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug) {
+	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug, boolean checkerWithoutCost) {
 		int t = 0;
 		int time = 0;
 		Graph g = gr;
@@ -127,8 +127,11 @@ public class Checker {
 							}
 							if (pair.getKey().getCapacity() < pair.getValue()) {
 								valid = false;
-								System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
-								//On n'essaye pas de vérifier les autres arcs
+								if (debug)
+								{
+									System.out.println("[CAPACITY EXCEEDED : " + pair.getValue() + "/" + pair.getKey().getCapacity() + " !]");
+								}
+									//On n'essaye pas de vérifier les autres arcs
 								break;
 							} else {
 								if (debug)
@@ -142,6 +145,7 @@ public class Checker {
 					for (EvacuatingGroup eg : toBeRemoved) {
 						groups.remove(eg);
 					}
+					
 					boolean finished = true;
 					if (groups.isEmpty()) {
 						for (Node ng : g.getNodes()) {
@@ -154,11 +158,11 @@ public class Checker {
 					} else {
 						finished = false;
 					}
+					
 					if (finished && t < s.getCost()) {
-						valid = false;
-						time = t;
-						break;
+						s.setCost(t);
 					}
+					
 				}
 				//S'il reste des groupes qui ne sont pas arrivés alors qu'on est arrivé à la fin des itérations
 				//la solution n'est pas valide

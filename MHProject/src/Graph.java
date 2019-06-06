@@ -11,6 +11,19 @@ public class Graph implements Cloneable{
 		this.nodes = new ArrayList<Node>();
 
 	}
+	
+	public int getNbEvacNodes()
+	{
+		int ret = 0;
+		for (Node n : this.nodes)
+		{
+			if (n instanceof EvacNode)
+			{
+				ret+=1;
+			}
+		}
+		return ret;
+	}
 
 
 	public void setSafe(String string) {
