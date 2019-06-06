@@ -1,8 +1,8 @@
 MHProject/bin/
 .classpath
 .project
-MH_Project/.classpath
-MH_Project/.project
-MH_Project/instances/*.sol
+MHProject/.classpath
+MHProject/.project
+MHProject/instances/*.sol
 
 /.metadata/

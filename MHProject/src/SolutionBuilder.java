@@ -8,13 +8,13 @@ public class SolutionBuilder {
 	public static Integer getBorneInf(Graph g)
 	{
 		int min = 0;
+		int tmp = 0;
 		for (Node n : g.getNodes())
 		{
 			if (n instanceof EvacNode)
 			{
 				ArrayList<Node> route = ((EvacNode) n).buildRoute(g);
-				int minRate = ((EvacNode) n).getMinRate(g);
-				Integer tmp = (((EvacNode) n).getPop() / minRate)-1;
+				tmp = (int) Math.ceil(( ((float)(((EvacNode) n).getPop())) / ((EvacNode) n).getMinRate(g)));
 				for (int i = 0 ; i < route.size()-1 ; i++)
 				{
 					tmp += route.get(i).getSuccessor(route.get(i+1).getId()).getLength();

@@ -5,7 +5,6 @@ public class Checker {
 
 	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug) {
 		int t = 0;
-		int time = 0;
 		Graph g = gr;
 		boolean valid = true;
 		//Tous les groupes actuellement entrain d'évacuer
@@ -142,6 +141,7 @@ public class Checker {
 					for (EvacuatingGroup eg : toBeRemoved) {
 						groups.remove(eg);
 					}
+					
 					boolean finished = true;
 					if (groups.isEmpty()) {
 						for (Node ng : g.getNodes()) {
@@ -156,9 +156,9 @@ public class Checker {
 					}
 					if (finished && t < s.getCost()) {
 						valid = false;
-						time = t;
 						break;
 					}
+					
 				}
 				//S'il reste des groupes qui ne sont pas arrivés alors qu'on est arrivé à la fin des itérations
 				//la solution n'est pas valide
@@ -168,9 +168,12 @@ public class Checker {
 				}
 			}
 		}
+		System.out.println("===> Reached announced cost.");
 		if (!groups.isEmpty()) {
 			valid = false;
 		}
+
+		s.setCost(t);
 		if (debug)
 		{
 			if (!valid) {

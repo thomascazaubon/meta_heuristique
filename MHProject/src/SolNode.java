@@ -21,6 +21,7 @@ public class SolNode {
 
 	public void setStartDate(int i) {
 		this.startDate = i;
+		System.out.println("WHAT THE FUCK !!!");
 	}
 	
 	public int getRate() {
@@ -28,6 +29,6 @@ public class SolNode {
 	}
 
 	public void setRate(int i) {
-		this.startDate = i;
+		this.rate = i;
 	}
 }

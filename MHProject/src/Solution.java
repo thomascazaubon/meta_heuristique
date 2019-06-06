@@ -18,6 +18,10 @@ public class Solution {
 		return cost;
 	}
 	
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
 	public void display() {
 		System.out.println("************ SOLUTION ************");
 		System.out.println("Number of evac nodes : " + nodes.size());

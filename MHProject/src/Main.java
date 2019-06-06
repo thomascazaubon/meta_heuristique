@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main {
 
@@ -9,21 +10,26 @@ public class Main {
 		Graph g;
 		Solution s;
 		try {
-			String n = "papier";
+			String n = "dense_10_30_3_1_I";
 			g = Reader.readGraph(n);
 			s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
+			s.display();
 			//Graph, Solution, Capacity, Duedate
 			Checker.check(g, s, true, false,false);
 			RechercheLocale.increaseRate(g,s);
+			s.display();
 		} catch (IOException e) {
 			System.out.println("Invalid path !");
-			*/
-	
+		}
+		*/
+		
 		boolean multiple = false;
 		if (multiple) {
 			ArrayList<String> notValid = new ArrayList<String>();
 			File file = new File("instances/");
 			File[] files = file.listFiles();
+			Date time = new Date();
+			Date time2;
 			for(File f: files){
 				if (f.getName().split("\\.")[1].equals("full")) {
 					String n = f.getName().split("\\.")[0];
@@ -41,13 +47,15 @@ public class Main {
 					}
 				}
 			}
+			time2 = new Date();
+			System.out.println(time2.getTime() - time.getTime());
 			for (int i = 0 ; i < notValid.size() ; i++)
 				System.out.println(notValid.get(i));
 		} else {
 			Graph g;
 			Solution s;
 			try {
-				String n = "simple_exemple_2";
+				String n = "dense_10_30_3_5_I";
 				g = Reader.readGraph(n);
 				s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 				//Graph, Solution, Capacity, Duedate
@@ -57,5 +65,6 @@ public class Main {
 				System.out.println("Invalid path !");
 			}
 		}
+		
 	}
 }
