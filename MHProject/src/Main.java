@@ -15,13 +15,18 @@ public class Main {
 			s = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 			s.display();
 			//Graph, Solution, Capacity, Duedate
-			System.out.println(Checker.check(g, s, true, false,false,false));
 			s.display();
 			//Solution s2 = RechercheLocale.compacter(g,s);
 			//s2 = RechercheLocale.increaseRate(g,s);
 			//System.out.println(Checker.check(g, s2, true, false,true,false));
 			//System.out.println(s2.toStringSol(g));
-			Solution s3 = RechercheLocale.modifierOrdre(g, s,n);
+			Date time = new Date();
+			Date time2;
+			Solution s3 = RechercheLocale.intensification(g, s,n);
+			time2 = new Date();
+			System.out.println("temps");
+			System.out.println(time2.getTime() - time.getTime());
+			
 			System.out.println(s3.toStringSol(g));
 		} catch (IOException e) {
 			System.out.println("Invalid path !");

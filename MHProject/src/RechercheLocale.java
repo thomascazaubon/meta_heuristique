@@ -73,12 +73,68 @@ public class RechercheLocale {
 		System.out.println(cpt);
 		return s;
 		
-		
 	}
 	
-	public static Solution modifierOrdre(Graph g, Solution s1, String n)
+	public static Solution intensification(Graph g, Solution s1, String n)
 	{
-		int cpt = 3;
+		RechercheLocale.compacter(g, s1);
+		int cpt = 10;
+		while (cpt!= 0)
+		{
+			System.out.println(cpt);
+			//System.out.println("VARIABLE cpt : " + cpt);
+			ArrayList<ArrayList<Integer>> array = new ArrayList<ArrayList<Integer>>();
+			
+			int nbEvacN = g.getNbEvacNodes();
+			//System.out.println(nbEvacN);
+			int bestSc = s1.getCost();
+			int bestI = -1;
+			int bestJ = -1;
+			
+			
+			for (int i = 0; i<nbEvacN;i++) {
+				for (int j = i+1; j<nbEvacN;j++)
+				{
+					//System.out.println("i : "+i+ " " + "j : "+j);
+					Collections.swap(s1.nodes, i, j);
+					RechercheLocale.compacter(g, s1);
+					if (s1.getCost()<bestSc && Checker.check(g, s1, true, false, false, false))
+					{
+						bestSc = s1.getCost();
+						bestI = i;
+						bestJ = j;
+					}
+					Collections.swap(s1.nodes, i, j);
+					try {
+						s1 = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			if (bestI != -1 && bestJ != -1)
+			{
+				Collections.swap(s1.nodes, bestI, bestJ);
+				RechercheLocale.compacter(g, s1);
+			}
+			else
+			{
+				RechercheLocale.compacter(g, s1);
+				System.out.println(cpt);
+				break;
+			}
+			//s1.display();
+			//System.out.println(s1.toStringSol(g));
+			cpt--;
+		}
+		System.out.println("COMPTEUR");
+		return s1;
+	}
+	
+	public static Solution diversification(Graph g, Solution s1, String n)
+	{
+		RechercheLocale.compacter(g, s1);
+		int cpt = 30;
 		while (cpt!= 0)
 		{
 			ArrayList<ArrayList<Integer>> array = new ArrayList<ArrayList<Integer>>();
@@ -106,7 +162,6 @@ public class RechercheLocale {
 					try {
 						s1 = Reader.readSolution(SolutionBuilder.buildSolutionSup(g, n));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -114,13 +169,17 @@ public class RechercheLocale {
 			if (bestI != -1 && bestJ != -1)
 			{
 				Collections.swap(s1.nodes, bestI, bestJ);
+				RechercheLocale.compacter(g, s1);
 			}
 			else
 			{
-				break;
+				RechercheLocale.compacter(g, s1);
+				s1.nodes.add(s1.nodes.get(0));
+				s1.nodes.remove(0);
 			}
-			RechercheLocale.compacter(g, s1);
-			cpt-=1;
+			s1.display();
+			System.out.println(s1.toStringSol(g));
+			cpt--;
 		}
 		
 		return s1;

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Checker {
-
 	public static boolean check(Graph gr, Solution s, boolean withCapacities, boolean withDeadlines, boolean debug, boolean checkerWithoutCost) {
 		int t = 0;
 		Graph g = gr;
@@ -180,7 +179,7 @@ public class Checker {
 			valid = false;
 		}
 
-		s.setCost(t);
+
 		if (debug)
 		{
 			System.out.println("===> Reached announced cost.");
